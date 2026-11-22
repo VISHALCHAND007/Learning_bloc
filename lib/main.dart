@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:learning_bloc/bloc/counter_bloc.dart';
-import 'package:learning_bloc/bloc/page_one_bloc.dart';
-import 'package:learning_bloc/cubit/counter_cubit.dart';
-import 'package:learning_bloc/cubit_with_screens/page_one.dart';
-
-import 'home_screen.dart';
+import 'package:learning_bloc/bloc/auth_bloc.dart';
+import 'package:learning_bloc/screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,18 +12,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      // create: (_) => CounterCubit(),
-      providers: [
-        BlocProvider(create: (_) => CounterCubit()),
-        BlocProvider(create: (_) => CounterBloc()),
-      ],
+    return BlocProvider(
+      create: (context) => AuthBloc(),
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-        // home: const MyHomePage(title: 'Flutter Demo Home Page'),
-        // home: const PageOne(title: 'Flutter Demo Home Page'),
-        home: const PageOneBloc(title: 'Flutter Demo Home Page'),
+        theme: ThemeData(
+          colorScheme: .fromSeed(
+            brightness: .dark,
+            seedColor: Colors.teal,
+          ),
+        ),
+        home: const LoginScreen(),
       ),
     );
   }
